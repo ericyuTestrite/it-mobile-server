@@ -3,3 +3,4 @@
 
 targets/
 src/main/resources/apns
+logs/

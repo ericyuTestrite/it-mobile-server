@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration>
 <configuration scan="true" scanPeriod="30 seconds"><!-- 'milliseconds','seconds','minutes' and 'hours' -->
-    <contextName>push-server</contextName>
+    <contextName>mobile-server</contextName>
     <Property name="log.base" value="./logs" />
-    <Property name="log.name" value="push-server" />
+    <Property name="log.name" value="mobile-server" />
     <jmxConfigurator />
     <!-- 控制台输出日志 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -35,8 +35,6 @@
     <!--这里指定logger name 是为jmx设置日志级别做铺垫 -->
     <logger name="com.testritegroup" additivity="true" level="info" />
     <logger name="org.springframework" additivity="true" level="error" />
-    <logger name="org.apache.ibatis" additivity="true" level="error" />
-    <logger name="org.mybatis" additivity="true" level="error" />
     <logger name="java.sql" additivity="true" level="error" />
 	<logger name="ch.qos.logback" additivity="true" level="error" />
     <logger name="org.springframework.security" additivity="true" level="error" />
