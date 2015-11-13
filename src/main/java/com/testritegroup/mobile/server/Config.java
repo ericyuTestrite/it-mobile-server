@@ -59,7 +59,7 @@ public class Config {
 		
 		try {
 
-			input = new FileInputStream("resources/conf.properties");
+			input = new FileInputStream("./resources/conf.properties");
 
 			// load a properties file
 			prop.load(input);
@@ -93,7 +93,7 @@ public class Config {
 			try {
 				thisConfig = new Config();
 			} catch (Exception e) {
-				logger.error("Loading resources/config.properties failed, "+ e.getMessage());
+				logger.error("Loading resources/conf.properties failed, "+ e.getMessage());
 			}
 		}
 		return thisConfig;

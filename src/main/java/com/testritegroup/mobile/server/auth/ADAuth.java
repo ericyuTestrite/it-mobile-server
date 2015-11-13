@@ -93,7 +93,7 @@ public class ADAuth {
 	         701 - account expired
 	         773 - user must reset password
 			 */
-			logger.info(authPassword.getUsername() + " auth failed with error Message:"+ exp.getMessage());
+			logger.error(exp.getMessage(),exp);
 			throw exp;
 		}
 		return profile;

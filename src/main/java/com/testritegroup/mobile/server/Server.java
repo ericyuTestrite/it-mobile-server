@@ -21,30 +21,30 @@ public class Server {
 
 	private ObjectMapper jsonMapper = new ObjectMapper();
 
-    @RequestMapping("/pushRegister")
-    String pushRegister(HttpRequest request, String body) throws Exception {
+    @RequestMapping(value="/pushRegister",method=RequestMethod.POST)
+    String pushRegister(@RequestBody String body) throws Exception {
     	PushRegister pushRegister = new PushRegister();
     	Object obj = pushRegister.handle(body);
 		return jsonMapper.writeValueAsString(obj);
     }
     
-    @RequestMapping("/pushLog/{userId}/appId/{appId}")
-    String pushLog(HttpRequest request, String userId, String appId, String body) throws Exception {
+    @RequestMapping(value="/pushLog/{userId}/appId/{appId}",method=RequestMethod.POST)
+    String pushLog(String userId, String appId,@RequestBody String body) throws Exception {
     	PushLog pushLog = new PushLog();
     	String req[] = new String[] {userId, appId};
     	Object obj = pushLog.handle(body, req);
     	return jsonMapper.writeValueAsString(obj);
     }
     
-    @RequestMapping("/adAuth")
-    String adAuth(HttpRequest request, String body)  throws Exception {
+    @RequestMapping(value="/adAuth",method=RequestMethod.POST)
+    String adAuth(@RequestBody String body)  throws Exception {
     	AdAuthRoute adAuthRoute = new AdAuthRoute();
     	Object obj = adAuthRoute.handle(body);
 		return jsonMapper.writeValueAsString(obj);
     }
     
     @RequestMapping("/sendPush")
-    String sendPush(HttpRequest request, String body)  throws Exception {
+    String sendPush(@RequestBody String body)  throws Exception {
     	SendPush sendPush = new SendPush();
     	Object obj = sendPush.handle(body);
 		return jsonMapper.writeValueAsString(obj);
