@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Sender;
+import com.testritegroup.mobile.server.Config;
 import com.testritegroup.mobile.server.route.model.PushMessage;
 
 public class SendAndroidMessage {
@@ -25,7 +26,7 @@ public class SendAndroidMessage {
 		
 		if(sender == null){
 			//hard coded for test only, this is a test sender for ericyu76@gmail.com
-			sender = new Sender("AIzaSyC9IixuO2X5v-UZ3sNyykYm7iOgAH-iWQw"); 
+			sender = new Sender(Config.getInstance().getProp(message.getAppId()+".androidSenderKey")); 
 		}
 		
 		Message messageBuilder = new Message.Builder()

@@ -14,6 +14,9 @@ public class Config {
 	
 	public static Config thisConfig = null;
 	
+
+	Properties prop = new Properties();
+	
 	public Integer servicePort = new Integer(8082);
 	public Integer getServicePort() {
 		return servicePort;
@@ -54,7 +57,6 @@ public class Config {
 	}
 
 	private Config() throws Exception {
-		Properties prop = new Properties();
 		InputStream input = null;
 		
 		try {
@@ -86,6 +88,10 @@ public class Config {
 				}
 			}
 		}
+	}
+	
+	public String getProp(String key){
+		return prop.getProperty(key);
 	}
 	
 	public static Config getInstance(){
