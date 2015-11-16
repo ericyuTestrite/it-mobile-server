@@ -14,7 +14,7 @@ import com.testritegroup.mobile.server.route.PushRegister;
 import com.testritegroup.mobile.server.route.SendPush;
 
 @RestController
-@EnableAutoConfiguration
+@SpringBootApplication
 public class Server {
 	
 	Logger logger = LoggerFactory.getLogger(Server.class);
