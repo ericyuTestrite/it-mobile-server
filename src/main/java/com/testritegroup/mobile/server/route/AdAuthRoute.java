@@ -16,16 +16,16 @@ public class AdAuthRoute{
 	private ObjectMapper jsonMapper = new ObjectMapper();
 
 	
-	public String handle(String body) {
+	public RestResult handle(String body) {
 		ADAuth authentication = new ADAuth();
 		UserAdProfile profile = null;
-		String resultJsonStr = "";
+		RestResult result = new RestResult();
 	    try {
 	    	AuthPassword authPassword = jsonMapper.readValue(body, AuthPassword.class);
 	    	Config config= Config.getInstance();
 	    	profile = authentication.authenticate(authPassword, config.getAdServer(), config.getAdDomain());
 	    	
-	    	RestResult result = new RestResult();
+	    	
 	    	if(profile!=null){
 	    		result.setMessage("success");
 	    		result.setReponseCode(200);
@@ -34,13 +34,10 @@ public class AdAuthRoute{
 	    		result.setMessage("Authentication Failed or can't find the user ");
 	    		result.setReponseCode(403);
 	    	}
-	    	
-	    	ObjectMapper objMapper = new ObjectMapper();
-	    	resultJsonStr = objMapper.writeValueAsString(result);
 	    } catch (Exception e) {
 	    	logger.error(e.getMessage(),e);
 	    }
-		return resultJsonStr;
+		return result;
 	}
 	
 	
