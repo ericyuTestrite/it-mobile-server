@@ -22,9 +22,8 @@ public class PushLog{
 
 	Logger logger = LoggerFactory.getLogger(PushLog.class);
 
-    public Object handle(String body, String req[]) {
+    public Object handle(String req[]) {
 		RestResult result = new  RestResult();
-    	logger.info("Received body: "+ body);
         try {
         	/**
         	 * @Todo validation the userDevices JSON

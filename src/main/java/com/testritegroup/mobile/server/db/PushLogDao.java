@@ -11,9 +11,7 @@ import org.bson.Document;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.UpdateOptions;
 import com.testritegroup.mobile.server.route.model.PushMessage;
-import com.testritegroup.mobile.server.route.model.UserDevices;
 
 public class PushLogDao {
 	private final MongoCollection<Document> pushLogCollection;
@@ -42,7 +40,10 @@ public class PushLogDao {
 			String appId) throws ParseException{
 		
 		Document queryFilter = new Document("to", userId).append("appId", appId);
+		
 		List<Document> pushLogs = pushLogCollection.find(queryFilter)
+				.limit(20)
+				.sort(new BasicDBObject("sendDate", -1))
 				.into(new ArrayList<Document>());
 		List<PushMessage> result = new ArrayList<PushMessage>();
 		for(Document pushLogDoc:pushLogs){
