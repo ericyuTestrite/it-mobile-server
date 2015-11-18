@@ -39,6 +39,7 @@ public class SendAndroidMessage {
 				// it goes back on-line.
 				.collapseKey("1")
 				.delayWhileIdle(true)
+				.timeToLive(60 * 60 * 24 * 7)
 				.addData("message", message.getMessage())
 				.addData("title", message.getTitle())
 				.build();
