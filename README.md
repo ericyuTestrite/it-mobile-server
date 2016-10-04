@@ -28,5 +28,5 @@
  </pre>
 ##相關技術
 1. 請先安裝 Maven 再執行 mvn package
-2. 使用 Spark-java 作為後端 REST Server (Java)
+2. 使用 SpringBoot 作為後端 REST Server (Java)
 3. 使用 mongodb 作為後端 DB Server
