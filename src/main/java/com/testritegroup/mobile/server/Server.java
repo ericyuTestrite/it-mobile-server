@@ -44,6 +44,12 @@ public class Server {
     	SendPush sendPush = new SendPush();
 		return sendPush.handle(body);
     }
+    
+    @RequestMapping("/hi/{name}")
+    Object hi(@PathVariable("name") String name)  throws Exception {
+    	logger.info("Hello "+ name);
+		return "Hello "+ name;
+    }
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Server.class, args);
