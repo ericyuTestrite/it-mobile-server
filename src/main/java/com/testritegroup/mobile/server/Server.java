@@ -11,6 +11,7 @@ import com.testritegroup.mobile.server.route.AdAuthRoute;
 import com.testritegroup.mobile.server.route.PushLog;
 import com.testritegroup.mobile.server.route.PushRegister;
 import com.testritegroup.mobile.server.route.SendPush;
+import com.testritegroup.mobile.server.route.UploadUserImage;
 
 @RestController
 @SpringBootApplication
@@ -50,6 +51,25 @@ public class Server {
     	logger.info("Hello "+ name);
 		return "Hello "+ name;
     }
+    
+    
+    
+    @RequestMapping("/uploadImage")
+    Object uploadImage(@RequestBody String body)  throws Exception {
+    	//{"userId":"TXXXX","appId":"com.testritegroup.app.testriteItPush","mimeType":"image/jpg","imageFile":"AA...."}
+    	logger.info(body);
+    	UploadUserImage uploadUserImage = new UploadUserImage();
+		return uploadUserImage.handle(body);
+    }
+    
+    @RequestMapping("/findUploadImage")
+    Object findUploadImage(@RequestBody String body)  throws Exception {
+    	//{"userId":"TXXXX","appId":"com.testritegroup.app.testriteItPush"}
+    	logger.info(body);
+    	UploadUserImage uploadUserImage = new UploadUserImage();
+
+		return uploadUserImage.findUploadImage(body);
+	 }
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Server.class, args);

@@ -23,6 +23,14 @@ public class MongoDBServices {
 		return pushLogDao;
 	}
 	
+	//register DAO (userImageDao)
+	private final UserImageDao userImageDao;
+	public UserImageDao getUserImageDao() {
+		return userImageDao;
+	}
+	
+	
+	
 	private MongoDBServices(String dbName){
 		String mongoDBURL = Config.getInstance().getMongoDBURL();
 		mongoClient = new MongoClient(new MongoClientURI(mongoDBURL));
@@ -31,6 +39,8 @@ public class MongoDBServices {
 		// initial the DAO
         userDevicesDao = new UserDevicesDao(database);
         pushLogDao = new PushLogDao(database);
+        // initial  userImageDao
+        userImageDao = new UserImageDao(database);
 	}
 	
 	public static MongoDBServices getInstance(){
