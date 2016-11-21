@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.testritegroup.linebot.BotProxy;
 import com.testritegroup.mobile.server.route.AdAuthRoute;
 import com.testritegroup.mobile.server.route.PushLog;
 import com.testritegroup.mobile.server.route.PushRegister;
@@ -46,10 +47,9 @@ public class Server {
 		return sendPush.handle(body);
     }
     
-    @RequestMapping("/hi/{name}")
-    Object hi(@PathVariable("name") String name)  throws Exception {
-    	logger.info("Hello "+ name);
-		return "Hello "+ name;
+    @RequestMapping("/linebot")
+    Object hi(@RequestBody String body)  throws Exception {
+		return BotProxy.getInstance().receive(body);
     }
     
     
