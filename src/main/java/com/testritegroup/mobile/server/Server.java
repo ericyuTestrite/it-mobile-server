@@ -2,22 +2,11 @@ package com.testritegroup.mobile.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
-import static java.util.Collections.singletonList;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.linecorp.bot.client.LineMessagingClient;
-import com.linecorp.bot.model.ReplyMessage;
-import com.linecorp.bot.model.event.Event;
-import com.linecorp.bot.model.event.MessageEvent;
-import com.linecorp.bot.model.event.message.TextMessageContent;
-import com.linecorp.bot.model.message.TextMessage;
-import com.linecorp.bot.model.response.BotApiResponse;
-import com.linecorp.bot.spring.boot.annotation.EventMapping;
-import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import com.testritegroup.linebot.BotProxy;
 import com.testritegroup.mobile.server.route.AdAuthRoute;
 import com.testritegroup.mobile.server.route.PushLog;
@@ -27,10 +16,7 @@ import com.testritegroup.mobile.server.route.UploadUserImage;
 
 @RestController
 @SpringBootApplication
-@LineMessageHandler
 public class Server {
-	@Autowired
-    private LineMessagingClient lineMessagingClient;
 	
 	Logger logger = LoggerFactory.getLogger(Server.class);
 
@@ -61,22 +47,7 @@ public class Server {
 		return sendPush.handle(body);
     }
     
-    @EventMapping
-    public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
-        logger.info("event: " + event);
-        final BotApiResponse apiResponse = lineMessagingClient
-                .replyMessage(new ReplyMessage(event.getReplyToken(),
-                                               singletonList(new TextMessage(event.getMessage().getText()))))
-                .get();
-        logger.info("Sent messages: " + apiResponse);
-    }
-
-    @EventMapping
-    public void defaultMessageEvent(Event event) {
-    	logger.info("event: " + event);
-    }
-    
-    
+    @RequestMapping("/linebot")
     Object hi(@RequestBody String body)  throws Exception {
 		return BotProxy.getInstance().receive(body);
     }
